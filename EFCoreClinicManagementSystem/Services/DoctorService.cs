@@ -12,6 +12,7 @@ namespace EFCoreClinicManagementSystem.Services
 {
     public class DoctorService
     {
+       
        private readonly AppDbContext _appDbContext;
 
         public DoctorService(AppDbContext appDbContext)
@@ -23,6 +24,7 @@ namespace EFCoreClinicManagementSystem.Services
 
         public async Task AddDoctorAsync(Doctor doctor)
         {
+           
             if (doctor == null)
                 Console.WriteLine("Can't Add A New Doctor Because It Is Empty:");
             else
@@ -44,7 +46,7 @@ namespace EFCoreClinicManagementSystem.Services
                 Console.WriteLine($"No A DoctorId Match: {doctorId}");
             else
             {
-                doctor.IsDeleted = true;
+                doctor.IsDeletedMethod();
                 await _appDbContext.SaveChangesAsync();
                 Console.WriteLine("A Doctor Is Deleted Softelly");
             }
@@ -85,12 +87,12 @@ namespace EFCoreClinicManagementSystem.Services
                 Console.WriteLine("Can't Update Doctor Because Not Found");
             else
             {
-                _doctor.Name = doctor.Name;
-                _doctor.Salary = doctor.Salary;
-                _doctor.Specialization = doctor.Specialization;
-                _doctor.IsDeleted = doctor.IsDeleted;
+                //_doctor.Name = doctor.Name;
+                //_doctor.Salary = doctor.Salary;
+                //_doctor.Specialization = doctor.Specialization;
+                //_doctor.IsDeleted = doctor.IsDeleted;
 
-                // _appDbContext.Doctors.Update(_doctor);
+                 _appDbContext.Doctors.Update(_doctor);
                 // We Not Need It
                 // Because EF Will Trake The Object And Update It
 
